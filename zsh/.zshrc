@@ -114,3 +114,8 @@ alias zshconfig="nano ~/.zshrc"
 
 alias dotfiles=/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME
 
+# To make github private key permanent
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval "$(ssh-agent -s)"
+    ssh-add /path/to/your-private-key
+fi
