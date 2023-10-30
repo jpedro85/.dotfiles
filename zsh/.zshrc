@@ -119,3 +119,5 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval "$(ssh-agent -s)"
     ssh-add /path/to/your-private-key
 fi
+
+[ -f ~/.cargo/env ] && source $HOME/.cargo/env
