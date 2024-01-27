@@ -12,6 +12,7 @@ general {
 }
 
 order += "disk /"
+order += "volume master"
 order += "cpu_usage"
 order += "memory"
 order += "battery all"
@@ -27,7 +28,7 @@ memory {
 }
 
 battery all {
-        format = "%status %percentage %remaining"
+        format = "Battery %percentage %remaining"
 }
 
 tztime local {
@@ -39,5 +40,13 @@ load {
 }
 
 disk "/" {
-        format = "%avail"
+        format = "Disk %avail"
+}
+
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: muted (%volume)"
+        device = "default"
+        mixer = "Master"
+        mixer_idx = 0
 }
