@@ -107,6 +107,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 alias bat="batcat"
 alias zshconfig="nano ~/.zshrc"
+alias asus="ssh -p717 jpedro@192.162.0.17"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

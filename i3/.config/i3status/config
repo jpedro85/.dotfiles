@@ -12,9 +12,19 @@ general {
 }
 
 order += "disk /"
+order += "cpu_usage"
+order += "memory"
 order += "battery all"
 order += "load"
 order += "tztime local"
+
+cpu_usage {
+        format = "  %usage"
+}
+
+memory {
+        format = "  %used"
+}
 
 battery all {
         format = "%status %percentage %remaining"
