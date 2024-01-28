@@ -216,3 +216,6 @@ bindsym XF86Calculator exec --no-startup-id "gnome-calculator"
 
 # Launch Spotify Key
 bindsym XF86Tools exec --no-startup-id "gnome-calculator"
+
+# Screenshot Key
+bindsym --release Print exec $HOME/.config/i3/scripts/screenshot.sh
