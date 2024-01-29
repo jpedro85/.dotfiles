@@ -102,7 +102,7 @@ bindsym $mod+a focus parent
 
 # Setting up the double monitor variables
 
-exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --rate 74.97 --right-of eDP --auto
+exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --rate 74.97 --right-of eDP --auto &
 
 set $primaryMonitor HDMI-1-0
 set $secondaryMonitor eDP
