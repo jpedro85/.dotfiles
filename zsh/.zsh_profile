@@ -5,7 +5,7 @@
 #
 # Example aliases
 alias bat="batcat"
-alias zshconf="nano ~/.zshrc"
+alias zshconf="nano ~/.zsh_profile"
 alias asus="ssh -p 717 192.168.0.17"
 alias work="cd ~/workspace"
 alias cod="codium"
@@ -13,12 +13,10 @@ alias py="python3"
 alias czsh="source ~/.zshrc"
 
 addToPathFront() {
-    if [[ "$PATH" != *"$1"* ]]; then
-        export PATH=$1:$PATH
+    if [[ ":$PATH:" != *":$1:"* ]]; then
+        export PATH="$1:$PATH"
     fi
 }
-
-export PATH="$HOME/.local/bin:$PATH"
 
 # bind to start tmux fzf
 addToPathFront $HOME/.local/bin
