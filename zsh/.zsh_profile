@@ -1,0 +1,32 @@
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+alias bat="batcat"
+alias zshconf="nano ~/.zshrc"
+alias asus="ssh -p 717 192.168.0.17"
+alias work="cd ~/workspace"
+alias cod="codium"
+alias py="python3"
+alias czsh="source ~/.zshrc"
+
+addToPathFront() {
+    if [[ "$PATH" != *"$1"* ]]; then
+        export PATH=$1:$PATH
+    fi
+}
+
+export PATH="$HOME/.local/bin:$PATH"
+
+# bind to start tmux fzf
+addToPathFront $HOME/.local/bin
+bindkey -s ^f "tmux-sessionizer\n"
+
+# To make github private key permanent
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/github
+fi
+

@@ -99,18 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-alias bat="batcat"
-alias zshconf="nano ~/.zshrc"
-alias asus="ssh -p 717 192.168.0.17"
-alias work="cd ~/workspace"
-alias cod="codium"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
+source ~/.zsh_profile
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
