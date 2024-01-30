@@ -18,8 +18,13 @@ addToPathFront() {
     fi
 }
 
-# bind to start tmux fzf
+export JAVA_HOME="/usr/lib/jvm/default-java"
+
+# All PATHS that might be needed
 addToPathFront $HOME/.local/bin
+addToPathFront $JAVA_HOME/bin
+
+# bind to start tmux fzf
 bindkey -s ^f "tmux-sessionizer\n"
 
 # To make github private key permanent
@@ -28,3 +33,4 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     ssh-add ~/.ssh/github
 fi
 
+export JAVA_HOME="/usr/lib/jvm/default-java"
