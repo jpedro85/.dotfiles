@@ -24,6 +24,8 @@ cpu_usage {
 }
 
 memory {
+	#exec = "$HOME/.config/i3status/scripts/mem_usage.sh"
+	#interval = 5
         format = "  %used"
 }
 

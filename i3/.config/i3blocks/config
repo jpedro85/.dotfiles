@@ -1,0 +1,46 @@
+separator=true
+separator_block_width=5
+markup=pango
+
+# Disk Usage
+[disk]
+label=Disk
+command=df / | awk '/\// {gsub(/[A-Za-z]/, "", $4); printf "%.1f GiB\n", $4/1024/1024}'
+interval=3600
+
+# Volume
+[volume]
+label=♪:
+command=~/.config/i3blocks/scripts/volume_mixer.sh
+color=#FFFFFFF
+interval=once
+signal=10
+
+# CPU Usage
+[cpu_usage]
+label= 
+command=~/.config/i3blocks/scripts/cpu_usage.sh
+interval=5
+
+# Memory Usage
+[memory]
+label= 
+command=~/.config/i3blocks/scripts/mem_usage.sh
+interval=5
+
+# Battery
+[battery]
+label=Battery
+command=acpi | cut -d, -f 2,3
+interval=30
+
+# Load Average
+[load]
+command=uptime | awk '{print $10}'
+interval=5
+
+# Time and Date
+[tztime]
+command=date '+%Y-%m-%d %H:%M:%S'
+interval=1
+
