@@ -102,7 +102,8 @@ bindsym $mod+a focus parent
 
 # Setting up the double monitor variables
 
-exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --rate 74.97 --right-of eDP --auto &
+# exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --rate 74.97 --right-of eDP --auto &
+exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --rate 144 --right-of eDP --auto &
 
 set $primaryMonitor HDMI-1-0
 set $secondaryMonitor eDP
@@ -122,6 +123,10 @@ exec_always --no-startup-id $HOME/.config/i3/scripts/detect-monitors.sh
 # Restoring the wallpapers on the screens 
 # ? if you want
 exec --no-startup-id nitrogen --restore
+
+# Disabling the screen saver
+# ! Optional
+exec --no-startup-id xset s off -dpms
 
 # Defining the workspace variables
 
