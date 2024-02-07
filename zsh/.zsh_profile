@@ -19,10 +19,12 @@ addToPathFront() {
 }
 
 export JAVA_HOME="/usr/lib/jvm/default-java"
+export NVIM_HOME="$HOME/workspace/neovim"
 
 # All PATHS that might be needed
 addToPathFront $HOME/.local/bin
 addToPathFront $JAVA_HOME/bin
+addToPathFront $NVIM_HOME/nvim-linux64/bin
 
 # bind to start tmux fzf
 bindkey -s ^f "tmux-sessionizer\n"
