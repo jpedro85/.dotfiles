@@ -1,16 +1,19 @@
 #!/bin/bash
 
-# Start Brave on Workspace 1
+# Start Brave
 i3-msg 'exec brave-browser'
 
-# Start Discord on Workspace 2
+# Start Discord
 i3-msg 'exec discord'
 
-# Start Spotify on Workspace 4
+# Start Spotify
 i3-msg 'exec flatpak run com.spotify.Client' 
 
-# Start Thunderbird on Workspace 5
+# Start Thunderbird
 i3-msg 'exec thunderbird'
 
-# Start Teams on Workspace 9
+# Start Teams
 i3-msg 'exec flatpak run com.github.IsmaelMartinez.teams_for_linux'
+
+# Start Autokey
+i3-msg 'exec autokey'
