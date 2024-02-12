@@ -109,7 +109,7 @@ set $primaryMonitor HDMI-1-0
 set $secondaryMonitor eDP
 
 # Defining the workspaces for each monitor
-# 1-Browser, 3-Coding on the primary Monitor
+# 1-Browser, 3-Coding, 5-ThunderBird, 9-Teams on the primary Monitor
 # 2-Discord, 4-Spotify on the secondary Monitor
 
 workspace 1 output $primaryMonitor
