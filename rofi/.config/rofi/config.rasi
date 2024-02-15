@@ -49,8 +49,7 @@ element-text {
 }
 
 element-icon {
-  size: 14;
-  padding: 0 10 0 0;
+  size: 24;
   background-color: transparent;
 }
 
