@@ -4,12 +4,12 @@
 # For a full list of active aliases, run `alias`.
 #
 # Example aliases
-alias bat="batcat"
-alias zshconf="nano ~/.zsh_profile"
+alias zshconf="nvim ~/.zsh_profile"
 alias asus="ssh -p 717 192.168.0.17"
 alias work="cd ~/workspace"
 alias cod="codium"
 alias py="python3"
+alias python="python3"
 alias czsh="source ~/.zshrc"
 
 addToPathFront() {
@@ -19,13 +19,12 @@ addToPathFront() {
 }
 
 export JAVA_HOME="/usr/lib/jvm/jdk-21-oracle-x64/bin"
-#export JAVA_HOME="/usr/lib/jvm/default-java"
 export NVIM_HOME="$HOME/workspace/neovim"
 
 # All PATHS that might be needed
 addToPathFront $HOME/.local/bin
 addToPathFront $JAVA_HOME/bin
-addToPathFront $NVIM_HOME/nvim-linux64/bin
+addToPathFront $NVIM_HOME/bin
 
 # bind to start tmux fzf
 bindkey -s ^f "tmux-sessionizer\n"
