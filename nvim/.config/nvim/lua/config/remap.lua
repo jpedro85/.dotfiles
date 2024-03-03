@@ -10,5 +10,3 @@ vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
 
 -- Format File according to the lsp ?
 vim.keymap.set("n", "<leader>f", vim.lsp.buf.format)
-
--- TODO To add more remaps as needed
