@@ -28,6 +28,7 @@ return {
                 "clangd",
                 "rust_analyzer",
                 "tsserver",
+                "jdtls",
             },
             handlers = {
                 function(server_name) -- default handler (optional)

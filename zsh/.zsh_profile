@@ -18,7 +18,7 @@ addToPathFront() {
     fi
 }
 
-export JAVA_HOME="/usr/lib/jvm/jdk-21-oracle-x64/bin"
+export JAVA_HOME="/usr/lib/jvm/jdk-21-oracle-x64"
 export NVIM_HOME="$HOME/workspace/neovim"
 
 # All PATHS that might be needed

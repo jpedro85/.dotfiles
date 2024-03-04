@@ -103,10 +103,10 @@ bindsym $mod+a focus parent
 # Setting up the double monitor variables
 
 # exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --rate 74.97 --right-of eDP --auto &
-exec --no-startup-id xrandr --output HDMI-1-0 --mode 1920x1080 --rate 144 --right-of eDP --auto &
+exec --no-startup-id xrandr --output eDP-1-0 --mode 1920x1080 --rate 144 --left-of HDMI-0 --mode 1920x1080 --rate 144 --primary
 
-set $primaryMonitor HDMI-1-0
-set $secondaryMonitor eDP
+set $primaryMonitor HDMI-0
+set $secondaryMonitor eDP-1-0
 
 # Defining the workspaces for each monitor
 # 1-Browser, 3-Coding, 5-ThunderBird, 9-Teams on the primary Monitor
@@ -133,7 +133,7 @@ assign [class="Slack"] $ws9
 ## Starting up the default appilication
 exec --no-startup-id $HOME/.config/i3/scripts/start_apps_on_i3_boot.sh
 
-# Restoring the wallpapers on the screens 
+# Restoring the wallpapers on the screens
 # ? if you want
 exec --no-startup-id nitrogen --restore
 
