@@ -24,7 +24,7 @@ autocmd('TextYankPost', {
     end,
 })
 
-autocmd({"BufWritePre"}, {
+autocmd({ "BufWritePre" }, {
     group = jpedroGroup,
     pattern = "*",
     command = [[%s/\s\+$//e]],
@@ -34,14 +34,19 @@ autocmd('LspAttach', {
     group = jpedroGroup,
     callback = function(e)
         local opts = { buffer = e.buf }
-        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-        vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-        vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "<leader>rr", function() vim.lsp.buf.references() end, opts)
-        vim.keymap.set("n", "<leader>r", function() vim.lsp.buf.rename() end, opts)
-        vim.keymap.set("n", "[ĺ", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "]ĺ", function() vim.diagnostic.goto_prev() end, opts)
+        vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end,
+            { buffer = e.buf, desc = "Goto to Definition" })
+        vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, { buffer = e.buf, desc = "Hover" })
+        vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end,
+            { buffer = e.buf, desc = "Query for symbol (like <C-f> on vscode)" })
+        vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end,
+            { buffer = e.buf, desc = "Open Diagnostics" })
+        vim.keymap.set("n", "<leader>vr", function() vim.lsp.buf.references() end,
+            { buffer = e.buf, desc = "See references" })
+        vim.keymap.set("n", "<leader>r", function() vim.lsp.buf.rename() end,
+            { buffer = e.buf, desc = "Rename Variable or Function" })
+        vim.keymap.set("n", "[", function() vim.diagnostic.goto_next() end, opts)
+        vim.keymap.set("n", "]", function() vim.diagnostic.goto_prev() end, opts)
     end
 })
 
