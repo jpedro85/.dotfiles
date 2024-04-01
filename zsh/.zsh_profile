@@ -11,6 +11,7 @@ alias cod="codium"
 alias py="python3"
 alias python="python3"
 alias czsh="source ~/.zshrc"
+alias glow="git flow"
 
 addToPathFront() {
     if [[ ":$PATH:" != *":$1:"* ]]; then
@@ -20,11 +21,14 @@ addToPathFront() {
 
 export JAVA_HOME="/usr/lib/jvm/jdk-21-oracle-x64"
 export NVIM_HOME="$HOME/workspace/neovim"
+export DOTNET_ROOT=$HOME/.dotnet
 
 # All PATHS that might be needed
 addToPathFront $HOME/.local/bin
 addToPathFront $JAVA_HOME/bin
 addToPathFront $NVIM_HOME/bin
+addToPathFront $DOTNET_ROOT
+addToPathFront $DOTNET_ROOT/tools
 
 # bind to start tmux fzf
 bindkey -s ^f "tmux-sessionizer\n"

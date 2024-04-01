@@ -34,8 +34,7 @@ vim.opt.termguicolors = true
 
 -- Sign column is the thing near the number line
 vim.opt.signcolumn = 'yes'
-vim.opt.scrolloff = 8
+vim.opt.scrolloff = 10
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
-
