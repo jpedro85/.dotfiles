@@ -103,8 +103,8 @@ bindsym $mod+a focus parent
 # Setting up the double monitor variables
 
 # exec --no-startup-id xrandr --output eDP-1-0 --mode 1920x1080 --rate 144 --primary --left-of HDMI-0 --mode 1920x1080 --rate 144 &
-exec --no-startup-id xrandr --output eDP-1-0 --mode 1920x1080 --rate 144 --left-of HDMI-0 &
 exec --no-startup-id xrandr --output HDMI-0 --mode 1920x1080 --rate 144 --primary &
+exec --no-startup-id xrandr --output eDP-1-0 --mode 1920x1080 --rate 144 --left-of HDMI-0 &
 
 set $primaryMonitor HDMI-0
 set $secondaryMonitor eDP-1-0
@@ -124,7 +124,7 @@ workspace 9 output $primaryMonitor
 exec_always --no-startup-id $HOME/.config/i3/scripts/detect-monitors.sh
 
 # Assign applications to specific workspaces
-assign [class="Brave-browser"] $ws1
+assign [class="thorium-browser"] $ws1
 assign [class="discord"] $ws2
 assign [class="Spotify"] $ws4
 assign [class="thunderbird"] $ws5

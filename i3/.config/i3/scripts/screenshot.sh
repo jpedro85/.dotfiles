@@ -4,7 +4,10 @@
 currentDate=$(date '+%Y_%m_%d')
 
 # Include the formatted date at the end of the filename, before the file extension
-fileName="$HOME/Pictures/screenshots/screenshot_${RANDOM}_$currentDate.webp"
+fileName="$HOME/Pictures/screenshots/screenshot_${RANDOM}_$currentDate.png"
 
 # Take the screenshot and save it to the specified fileName
-import "$fileName"
+scrot -s "$fileName"
+
+# Copy the screenshot to the clipboard
+xclip -selection clipboard -t image/png -i "$fileName"

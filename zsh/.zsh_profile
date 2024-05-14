@@ -12,6 +12,9 @@ alias py="python3"
 alias python="python3"
 alias czsh="source ~/.zshrc"
 alias glow="git flow"
+alias getch="git fetch --prune"
+alias gull="git pull"
+alias gush="git push"
 
 addToPathFront() {
     if [[ ":$PATH:" != *":$1:"* ]]; then
@@ -21,6 +24,8 @@ addToPathFront() {
 
 export JAVA_HOME="/usr/lib/jvm/jdk-21-oracle-x64"
 export NVIM_HOME="$HOME/workspace/neovim"
+export NODE_HOME="$HOME/workspace/cloned_repos/node-v20.12.2-linux-x64"
+export DEPOT_TOOLS="$HOME/workspace/cloned_repos/depot_tools"
 
 # All PATHS that might be needed
 addToPathFront $HOME/.local/bin
@@ -28,6 +33,8 @@ addToPathFront $JAVA_HOME/bin
 addToPathFront $NVIM_HOME/bin
 addToPathFront $DOTNET_ROOT
 addToPathFront $DOTNET_ROOT/tools
+addToPathFront $NODE_HOME/bin
+addToPathFront $DEPOT_TOOLS
 
 # bind to start tmux fzf
 bindkey -s ^f "tmux-sessionizer\n"
@@ -36,4 +43,5 @@ bindkey -s ^f "tmux-sessionizer\n"
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval "$(ssh-agent -s)"
     ssh-add ~/.ssh/github
+    ssh-add ~/.ssh/asusV2
 fi
