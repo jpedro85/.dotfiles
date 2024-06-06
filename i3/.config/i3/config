@@ -124,7 +124,7 @@ workspace 9 output $primaryMonitor
 exec_always --no-startup-id $HOME/.config/i3/scripts/detect-monitors.sh
 
 # Assign applications to specific workspaces
-assign [class="thorium-browser"] $ws1
+assign [class="Thorium"] $ws1
 assign [class="discord"] $ws2
 assign [class="Spotify"] $ws4
 assign [class="thunderbird"] $ws5
@@ -247,3 +247,6 @@ bindsym XF86Tools exec --no-startup-id "gnome-calculator"
 
 # Screenshot Key
 bindsym --release Print exec $HOME/.config/i3/scripts/screenshot.sh
+
+# Bind to switch Audio profiles
+bindsym $mod+p exec ~/.audio/bin/wh1000xm4-audio-profile.sh
