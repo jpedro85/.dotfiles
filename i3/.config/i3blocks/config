@@ -18,13 +18,13 @@ signal=10
 
 # CPU Usage
 [cpu_usage]
-label= 
+label=
 command=~/.config/i3blocks/scripts/cpu_usage.sh
 interval=5
 
 # Memory Usage
 [memory]
-label= 
+label=
 command=~/.config/i3blocks/scripts/mem_usage.sh
 interval=5
 
@@ -41,6 +41,6 @@ interval=5
 
 # Time and Date
 [tztime]
-command=date '+%Y-%m-%d %H:%M:%S'
+command=date '+%d-%m-%Y %H:%M:%S'
 interval=1
 
