@@ -15,6 +15,9 @@ alias glow="git flow"
 alias getch="git fetch --prune"
 alias gull="git pull"
 alias gush="git push"
+alias neofetch='fastfetch'
+alias fetch='fastfetch'
+alias vim="nvim"
 
 addToPathFront() {
     if [[ ":$PATH:" != *":$1:"* ]]; then
