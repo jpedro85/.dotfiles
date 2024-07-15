@@ -24,6 +24,5 @@
   "tokyonight.nvim": { "branch": "main", "commit": "197f5c925620d4dded8204ecb17755e0be1646ea" },
   "trouble.nvim": { "branch": "main", "commit": "f630a44bcc587ca59639369932e278b8d57d2101" },
   "undotree": { "branch": "master", "commit": "56c684a805fe948936cda0d1b19505b84ad7e065" },
-  "vim-fugitive": { "branch": "master", "commit": "8c8cdf4405cb8bdb70dd9812a33bb52363a87dbc" },
-  "which-key.nvim": { "branch": "main", "commit": "499caae765837b2ecf117ded2a76f82ede2d7d16" }
+  "vim-fugitive": { "branch": "master", "commit": "8c8cdf4405cb8bdb70dd9812a33bb52363a87dbc" }
 }
