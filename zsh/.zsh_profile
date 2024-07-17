@@ -45,9 +45,9 @@ bindkey -s ^f "tmux-sessionizer\n"
 
 # To make github private key permanent
 if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/github
-    ssh-add ~/.ssh/asusV2
+    eval "$(ssh-agent -s)" > /dev/null 2>&1
+    ssh-add ~/.ssh/github > /dev/null 2>&1
+    ssh-add ~/.ssh/asusV2 > /dev/null 2>&1
 fi
 
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/theme.toml)"
