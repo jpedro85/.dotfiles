@@ -84,6 +84,7 @@
       "keyColor": "bright_cyan"
     },
     "break",
+    "colors",
     {
       "type": "custom",
       "format": "┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┛"

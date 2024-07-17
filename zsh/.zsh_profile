@@ -1,3 +1,4 @@
+
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
 # users are encouraged to define aliases within the ZSH_CUSTOM folder.
@@ -25,7 +26,7 @@ addToPathFront() {
     fi
 }
 
-export JAVA_HOME="/usr/lib/jvm/jdk-21-oracle-x64"
+export JAVA_HOME="/usr/lib/jvm/jdk-22-oracle-aarch64"
 export NVIM_HOME="$HOME/workspace/neovim"
 export NODE_HOME="$HOME/workspace/cloned_repos/node-v20.12.2-linux-x64"
 export DEPOT_TOOLS="$HOME/workspace/cloned_repos/depot_tools"
@@ -48,3 +49,5 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     ssh-add ~/.ssh/github
     ssh-add ~/.ssh/asusV2
 fi
+
+eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/theme.toml)"
