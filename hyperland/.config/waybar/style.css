@@ -94,7 +94,7 @@ window#waybar.hidden {
 #battery.critical,
 #battery.urgent {
   background-color: #ff0000;
-  color: #FFFF00;
+  color: #ffff00;
 }
 
 #battery.charging {
@@ -116,14 +116,13 @@ window#waybar.hidden {
 }
 
 #clock {
-  font-family: JetBrainsMono Nerd Font;
+  font-family: Hack Nerd Font;
   background-color: #cba6f7;
 }
 
 #custom-power {
   background-color: #f2cdcd;
 }
-
 
 tooltip {
   border-radius: 8px;
