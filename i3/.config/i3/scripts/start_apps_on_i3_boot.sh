@@ -6,7 +6,7 @@
 i3-msg 'exec thorium-browser'
 
 # Start Discord
-i3-msg 'exec discord'
+i3-msg 'exec vesktop'
 
 # Start Spotify
 i3-msg 'exec spotify'

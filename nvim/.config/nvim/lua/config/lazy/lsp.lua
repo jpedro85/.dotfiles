@@ -28,6 +28,7 @@ return {
             ensure_installed = {
                 "lua_ls",
                 "rust_analyzer",
+                "clangd",
                 "tsserver",
                 "jdtls",
             },
@@ -37,6 +38,7 @@ return {
                         capabilities = capabilities
                     }
                 end,
+
 
                 ["lua_ls"] = function()
                     local lspconfig = require("lspconfig")
@@ -49,6 +51,16 @@ return {
                                 }
                             }
                         }
+                    }
+                end,
+
+                ["clangd"] = function()
+                    local lspconfig = require("lspconfig")
+                    lspconfig.clangd.setup {
+                        on_attach = function(client, bufnr)
+                            client.server_capabilities.signatureHelpProvider = false
+                        end,
+                        capabilities = capabilities,
                     }
                 end,
             }
