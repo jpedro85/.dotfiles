@@ -1,10 +1,25 @@
 #!/usr/bin/env zsh
-# I am using zsh instead of bash.  I was having some troubles using bash with
-# arrays.  Didn't want to investigate, so I just did zsh
-pushd $DOTFILES
-for folder in $(echo $STOW_FOLDERS | sed "s/,/ /g")
-do
+
+# Ensure DOTFILES is set
+if [[ -z $DOTFILES ]]; then
+    echo "DOTFILES variable is not set. Please set it to your dotfiles directory."
+    exit 1
+fi
+
+# Ensure STOW_FOLDERS is set
+if [[ -z $STOW_FOLDERS ]]; then
+    echo "STOW_FOLDERS variable is not set. Please set it to the folders you want to clean."
+    exit 1
+fi
+
+# Change to the DOTFILES directory
+pushd $DOTFILES || { echo "Failed to change directory to $DOTFILES"; exit 1; }
+
+# Unstow each folder in STOW_FOLDERS
+for folder in ${(s:,:)STOW_FOLDERS}; do
     echo "Removing $folder"
     stow -D $folder
 done
+
+# Return to the original directory
 popd

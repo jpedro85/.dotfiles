@@ -1,0 +1,58 @@
+#!/usr/bin/env zsh
+
+# Function to display usage information
+usage() {
+    echo "Usage: $0 -e <environment>"
+    echo "  -e <environment>  Specify the environment to stow (i3 or hyprland)"
+    exit 1
+}
+
+# Parse arguments
+while getopts "e:" opt; do
+    case $opt in
+        e)
+            ENVIRONMENT=$OPTARG
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+
+# Check if environment argument is provided
+if [[ -z $ENVIRONMENT ]]; then
+    usage
+fi
+
+# Set STOW_FOLDERS based on the chosen environment
+case $ENVIRONMENT in
+    i3)
+        STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,i3,fastfetch,bin,alacritty,autokey"
+        ;;
+    hyprland)
+        STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,hyprland,dunst,bin,alacritty,fastfetch"
+        ;;
+    *)
+        echo "Invalid environment: $ENVIRONMENT"
+        usage
+        ;;
+esac
+
+# Set DOTFILES if not already set
+if [[ -z $DOTFILES ]]; then
+    DOTFILES=$HOME/.dotfiles
+fi
+
+# Function to stow folders
+stow_folders() {
+    pushd $DOTFILES
+    for folder in ${(s:,:)STOW_FOLDERS}; do
+        echo "stow $folder"
+        stow -D $folder
+        stow $folder
+    done
+    popd
+}
+
+# Execute the stowing process
+stow_folders
