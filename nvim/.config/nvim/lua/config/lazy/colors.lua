@@ -26,6 +26,8 @@ return {
                     floats = "dark",   -- style for floating windows
                 },
             })
+
+            -- vim.cmd("colorscheme tokyonight")
         end
     },
     {
@@ -36,9 +38,37 @@ return {
                 disable_background = true,
             })
 
-            vim.cmd("colorscheme rose-pine")
+            -- vim.cmd("colorscheme rose-pine")
+            --
+            -- ColorMyPencils()
+        end
+    },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        config = function()
+            require("catppuccin").setup({
+                flavour = "mocha",             -- latte, frappe, macchiato, mocha
+                transparent_background = true, -- disables setting the background color.
+                show_end_of_buffer = true,     -- shows the '~' characters after the end of buffers
+                term_colors = true,            -- sets terminal colors (e.g. `g:terminal_color_0`)
+                no_italic = true,              -- Force no italic
+                no_bold = false,               -- Force no bold
+                no_underline = false,          -- Force no underline
+                default_integrations = true,
+                integrations = {
+                    cmp = true,
+                    treesitter = true,
+                    mini = {
+                        enabled = true,
+                    },
+                },
+            })
 
-            ColorMyPencils()
+            -- setup must be called before loading
+            vim.cmd.colorscheme("catppuccin")
+            vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
+            vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
         end
     },
 }
