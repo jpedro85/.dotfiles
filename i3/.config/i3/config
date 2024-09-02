@@ -124,7 +124,7 @@ exec_always --no-startup-id $HOME/.config/i3/scripts/detect-monitors.sh
 
 # Assign applications to specific workspaces
 assign [class="Thorium"] $ws1
-assign [class="discord"] $ws2
+assign [class="vesktop"] $ws2
 assign [class="Spotify"] $ws4
 assign [class="thunderbird"] $ws5
 assign [class="teams-for-linux"] $ws9
@@ -243,3 +243,5 @@ bindsym XF86Tools exec --no-startup-id $HOME/.config/i3/scripts/change-audio-pro
 
 # Screenshot Key
 bindsym Print exec --no-startup-id $HOME/.config/i3/scripts/screenshot.sh
+
+exec --no-startup-id xsetroot -cursor_name left_ptr -cursor_theme Night-Diamond-Red
