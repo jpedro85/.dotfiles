@@ -30,7 +30,7 @@ case $ENVIRONMENT in
         STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,i3,fastfetch,bin,alacritty,autokey"
         ;;
     hyprland)
-        STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,hyprland,dunst,bin,alacritty,fastfetch"
+        STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,hyperland,dunst,bin,alacritty,fastfetch"
         ;;
     *)
         echo "Invalid environment: $ENVIRONMENT"

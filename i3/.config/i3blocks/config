@@ -15,6 +15,7 @@ command=~/.config/i3blocks/scripts/volume_mixer.sh
 color=#FFFFFFF
 interval=once
 signal=10
+interval=3
 
 # CPU Usage
 [cpu_usage]

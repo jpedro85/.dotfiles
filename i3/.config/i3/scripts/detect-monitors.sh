@@ -6,16 +6,19 @@ MONITORS=$(xrandr --query | grep ' connected' | wc -l)
 # Apply configurations based on the number of monitors
 if [ "$MONITORS" -eq "1" ]; then
     # Configuration for one monitor
-    i3-msg 'workspace 1; move workspace to output eDP-1-0'
-    i3-msg 'workspace 3; move workspace to output eDP-1-0'
-    i3-msg 'workspace 5; move workspace to output eDP-1-0'
-    i3-msg 'workspace 9; move workspace to output eDP-1-0'
+    # i3-msg 'workspace 1; move workspace to output eDP-1-0'
+    # i3-msg 'workspace 3; move workspace to output eDP-1-0'
+    # i3-msg 'workspace 5; move workspace to output eDP-1-0'
+    # i3-msg 'workspace 9; move workspace to output eDP-1-0'
     # Additional commands for one monitor setup
+    xrandr --output eDP-1-0 --auto --primary
 else
     # Configuration for two monitors
-    i3-msg 'workspace 1; move workspace to output HDMI-0'
-    i3-msg 'workspace 3; move workspace to output HDMI-0'
-    i3-msg 'workspace 5; move workspace to output HDMI-0'
-    i3-msg 'workspace 9; move workspace to output HDMI-0'
+    # i3-msg 'workspace 1; move workspace to output HDMI-0'
+    # i3-msg 'workspace 3; move workspace to output HDMI-0'
+    # i3-msg 'workspace 5; move workspace to output HDMI-0'
+    # i3-msg 'workspace 9; move workspace to output HDMI-0'
     # Additional commands for two monitor setup
+    xrandr --output HDMI-0 --mode 1920x1080 --rate 144 --primary
+    xrandr --output eDP-1-0 --mode 1920x1080 --rate 144 --left-of HDMI-0
 fi
