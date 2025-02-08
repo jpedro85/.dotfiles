@@ -53,6 +53,7 @@ window#waybar.hidden {
 #cpu,
 #memory,
 #custom-power,
+#battery,
 #backlight,
 #pulseaudio,
 #network,
