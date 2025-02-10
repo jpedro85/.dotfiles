@@ -1,31 +1,44 @@
 #!/usr/bin/env zsh
 
+# Function to create directory if not exist
+create_screenshot_dir() {
+  mkdir -p "$HOME/Pictures/screenshots"
+}
+
+# Function to check if rofi is installed
+check_rofi_installed() {
+  if ! command -v rofi &> /dev/null; then
+    echo "rofi could not be found. Please install rofi."
+    exit 1
+  fi
+}
+
 # Function to take a screenshot and save it to a file
 take_screenshot_to_file() {
-  # Format the date as Year_Month_Day
   currentDate=$(date '+%Y_%m_%d')
-
-  # Include the formatted date at the end of the filename, before the file extension
   fileName="$HOME/Pictures/screenshots/screenshot_${RANDOM}_$currentDate.png"
 
-  # Take the screenshot and save it to the specified fileName
-  flameshot gui -p "$fileName"
-
-  # Copy the screenshot to the clipboard
-  xclip -selection clipboard -t image/png -i "$fileName"
-
-  notify-send "Screenshot" "Saved to $fileName and copied to clipboard."
+  if flameshot gui -p "$fileName"; then
+    xclip -selection clipboard -t image/png -i "$fileName" && notify-send "Screenshot" "Saved to $fileName and copied to clipboard."
+  else
+    notify-send "Error" "Failed to take screenshot or copy to clipboard."
+  fi
 }
 
 # Function to take a screenshot and copy it directly to the clipboard
 take_screenshot_to_clipboard() {
-  # Take the screenshot and copy it to the clipboard
-  flameshot gui -c
-
-  notify-send "Screenshot" "Copied to clipboard."
+  if flameshot gui -c; then
+    notify-send "Screenshot" "Copied to clipboard."
+  else
+    notify-send "Error" "Failed to take screenshot or copy to clipboard."
+  fi
 }
 
-# Prompt the user to choose an action
+# Main script execution
+
+check_rofi_installed
+create_screenshot_dir
+
 choice=$(echo -e "Save to file and clipboard\nCopy to clipboard only" | rofi -dmenu -p "Choose screenshot action")
 
 case $choice in
