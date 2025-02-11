@@ -2,16 +2,24 @@
 
 # Function to display usage information
 usage() {
-    echo "Usage: $0 -e <environment>"
+    echo "Usage: $0 -e <environment> [-v] [-n]"
     echo "  -e <environment>  Specify the environment to stow (i3 or hyprland)"
+    echo "  -v                Enable verbose output"
+    echo "  -n                Perform a dry run without applying changes"
     exit 1
 }
 
 # Parse arguments
-while getopts "e:" opt; do
+while getopts "e:v:n" opt; do
     case $opt in
         e)
             ENVIRONMENT=$OPTARG
+            ;;
+        v)
+            VERBOSE=true
+            ;;
+        n)
+            DRY_RUN=true
             ;;
         *)
             usage
@@ -43,16 +51,47 @@ if [[ -z $DOTFILES ]]; then
     DOTFILES=$HOME/.dotfiles
 fi
 
+# Function to check if stow is installed
+check_stow_installed() {
+    if ! command -v stow &> /dev/null; then
+        echo "Error: 'stow' could not be found. Please install it first."
+        exit 1
+    fi
+}
+
+# Function to validate folders
+validate_folders() {
+    for folder in ${(s:,:)STOW_FOLDERS}; do
+        if [[ ! -d "$DOTFILES/$folder" ]]; then
+            echo "Error: Folder $folder does not exist in $DOTFILES"
+            exit 1
+        fi
+    done
+}
+
 # Function to stow folders
 stow_folders() {
-    pushd $DOTFILES
+    pushd $DOTFILES > /dev/null || exit
+
     for folder in ${(s:,:)STOW_FOLDERS}; do
-        echo "stow $folder"
-        stow -D $folder
-        stow $folder
+        if [[ "$DRY_RUN" == true ]]; then
+            echo "Dry run: stow -nD $folder"
+            echo "Dry run: stow -vn $folder"
+        else
+            if [[ "$VERBOSE" == true ]]; then
+                echo "Stowing folder $folder..."
+            fi
+            stow -D $folder > /dev/null || exit
+            stow $folder > /dev/null || exit
+        fi
     done
-    popd
+
+    popd > /dev/null
 }
+
+# Check if stow is installed and validate folders
+check_stow_installed
+validate_folders
 
 # Execute the stowing process
 stow_folders
