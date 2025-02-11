@@ -82,7 +82,7 @@ create_screenshot_dir
 
 choice=$(echo -e "Save to file and clipboard\nCopy to clipboard only" | rofi -dmenu -p "Choose screenshot action")
 # To ensure rofi is out of the screenshot
-sleep 0.1
+sleep 0.29
 
 case $choice in
 "Save to file and clipboard")
