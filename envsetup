@@ -2,21 +2,21 @@
 
 # Function to display usage information
 usage() {
-    echo "Usage: $0 -e <environment> [-v] [-n]"
+    echo "Usage: $0 -e <environment> [-q] [-n]"
     echo "  -e <environment>  Specify the environment to stow (i3 or hyprland)"
-    echo "  -v                Enable verbose output"
+    echo "  -q                Disable verbose output"
     echo "  -n                Perform a dry run without applying changes"
     exit 1
 }
 
 # Parse arguments
-while getopts "e:v:n" opt; do
+while getopts "e:q:n" opt; do
     case $opt in
         e)
             ENVIRONMENT=$OPTARG
             ;;
-        v)
-            VERBOSE=true
+        q)
+            QUIET=true
             ;;
         n)
             DRY_RUN=true
@@ -38,7 +38,9 @@ case $ENVIRONMENT in
         STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,i3,fastfetch,bin,alacritty,autokey"
         ;;
     hyprland)
-        STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,hyperland,dunst,bin,alacritty,fastfetch"
+        STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,hyperland,dunst,bin,alacritty,fastfetch,kvantum"
+        # Needed packages: hyprlock, hyrpaper, waybar, flameshot, rofi-wayland, hyprpolkitagent, hyprland-qt-support,
+        # xdg-desktop-portal-hyprland, hyprcursor, xdg-desktop-portal-gtk (for files), wl-copy, pipewire, qt5-wayland and qt6-wayland
         ;;
     *)
         echo "Invalid environment: $ENVIRONMENT"
@@ -69,29 +71,85 @@ validate_folders() {
     done
 }
 
+# Function to check for necessary packages
+check_packages() {
+    packages=("hyprlock" "hyprpaper" "waybar" "flameshot" "rofi-wayland" "hyprpolkitagent" "hyprland-qt-support"
+              "xdg-desktop-portal-hyprland" "hyprcursor" "xdg-desktop-portal-gtk" "wl-copy" "pipewire" "qt5-wayland" "qt6-wayland")
+
+    # Determine the package manager
+    if command -v pacman &> /dev/null; then
+        pkg_manager="pacman"
+    elif command -v dnf &> /dev/null; then
+        pkg_manager="dnf"
+    elif command -v apt &> /dev/null; then
+        pkg_manager="apt"
+    else
+        echo "Unsupported package manager. Please install the required packages manually."
+        exit 1
+    fi
+
+    # Function to check if a package is installed
+    is_package_installed() {
+        case "$pkg_manager" in
+            pacman)
+                pacman -Q "$1" &> /dev/null && return 0
+                ;;
+            dnf)
+                rpm -q "$1" &> /dev/null && return 0
+                ;;
+            apt)
+                dpkg -l | grep -q "^ii  $1 " && return 0
+                ;;
+        esac
+
+        # Check if the package provides a command
+        if command -v "$1" &> /dev/null; then
+            return 0
+        fi
+
+        return 1
+    }
+
+    # Loop through packages and check their status
+    for package in "${packages[@]}"; do
+        if ! is_package_installed "$package"; then
+            echo "Package '$package' is not installed or not detected by the package manager."
+            echo "You may need to install it manually."
+            exit 1
+        fi
+    done
+}
+
+check_packages
+
 # Function to stow folders
 stow_folders() {
     pushd $DOTFILES > /dev/null || exit
-
     for folder in ${(s:,:)STOW_FOLDERS}; do
         if [[ "$DRY_RUN" == true ]]; then
             echo "Dry run: stow -nD $folder"
             echo "Dry run: stow -vn $folder"
         else
-            if [[ "$VERBOSE" == true ]]; then
-                echo "Stowing folder $folder..."
+            if [[ "$QUIET" == true ]]; then
+                stow -D $folder > /dev/null || exit
+                stow $folder > /dev/null || exit
             fi
+            echo "Stowing folder $folder..."
             stow -D $folder > /dev/null || exit
             stow $folder > /dev/null || exit
         fi
     done
-
     popd > /dev/null
 }
 
 # Check if stow is installed and validate folders
 check_stow_installed
 validate_folders
+
+# Check for necessary packages in the hyprland environment
+if [[ "$ENVIRONMENT" == "hyprland" ]]; then
+    check_packages
+fi
 
 # Execute the stowing process
 stow_folders
