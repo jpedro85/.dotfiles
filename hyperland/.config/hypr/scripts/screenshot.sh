@@ -25,18 +25,14 @@ done
 # Function to take a screenshot to file using Hyprshot
 take_screenshot_to_file() {
     local current_date=$(date '+%Y_%m_%d')
-    local fileName="$HOME/Pictures/screenshots/screenshot_${RANDOM}_${current_date}.png"
-    if hyprshot -m region -o "$fileName"; then
-        wl-copy < "$fileName"
-        notify-send "Screenshot" "Saved to $fileName and copied to clipboard."
-    else
-        notify-send "Error" "Failed to take screenshot."
-        echo "Error: Failed to take screenshot."
-    fi
+    local fileName="screenshot_${RANDOM}_${current_date}.png"
+    local filePath="$OUTPUT_FOLDER/$fileName"
+    hyprshot -m region -o $OUTPUT_FOLDER -f $fileName && wl-copy < "$fileName"
 }
 
 # Function to take a screenshot to clipboard using Hyprshot
 take_screenshot_to_clipboard() {
+    # Only this place handles hyprshot like this due to not knowing if uses the wl-copy or not
     if hyprshot -r -z -m region  | wl-copy; then
         notify-send "Screenshot" "Copied to clipboard."
     else
