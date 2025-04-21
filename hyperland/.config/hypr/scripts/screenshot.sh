@@ -4,7 +4,7 @@ OUTPUT_FOLDER="$HOME/Pictures/screenshots"
 
 # Function to create directory if not exist
 create_screenshot_dir() {
-    mkdir -p OUTPUT_FOLDER
+    mkdir -p $OUTPUT_FOLDER
 }
 
 # Function to check if a command is installed

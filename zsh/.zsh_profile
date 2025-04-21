@@ -26,19 +26,20 @@ addToPathFront() {
     fi
 }
 
-export JAVA_HOME="/usr/lib/jvm/jdk-22-oracle-aarch64"
-export NVIM_HOME="$HOME/workspace/neovim"
-export NODE_HOME="$HOME/workspace/cloned_repos/node-v20.12.2-linux-x64"
-export DEPOT_TOOLS="$HOME/workspace/cloned_repos/depot_tools"
+export CPP_LIBS="/usr/include"
+export CPP_LIBS2="/usr/local/include"
+export JAVA_HOME="/usr/lib/jvm/jdk-17.0.2"
+export GO_HOME="/usr/local/go"
+export TERMINAL="/usr/local/bin/alacritty"
+export ANDROID_HOME="$HOME/Android/Sdk"
 
 # All PATHS that might be needed
 addToPathFront $HOME/.local/bin
 addToPathFront $JAVA_HOME/bin
-addToPathFront $NVIM_HOME/bin
-addToPathFront $DOTNET_ROOT
-addToPathFront $DOTNET_ROOT/tools
-addToPathFront $NODE_HOME/bin
-addToPathFront $DEPOT_TOOLS
+addToPathFront $GO_HOME/bin
+addToPathFront $CPP_LIBS
+addToPathFront $CPP_LIBS2
+addToPathFront $ANDROID_HOME/Sdk
 
 # bind to start tmux fzf
 bindkey -s ^f "tmux-sessionizer\n"
@@ -48,6 +49,7 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     eval "$(ssh-agent -s)" > /dev/null 2>&1
     ssh-add ~/.ssh/github > /dev/null 2>&1
     ssh-add ~/.ssh/asusV2 > /dev/null 2>&1
+    ssh-add ~/.ssh/id_rsa_remarkable > /dev/null 2>&1
 fi
 
 eval "$(oh-my-posh init zsh --config $HOME/.config/ohmyposh/theme.toml)"
