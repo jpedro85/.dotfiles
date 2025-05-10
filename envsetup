@@ -127,8 +127,9 @@ stow_folders() {
     pushd $DOTFILES > /dev/null || exit
     for folder in ${(s:,:)STOW_FOLDERS}; do
         if [[ "$DRY_RUN" == true ]]; then
-            echo "Dry run: stow -nD $folder"
-            echo "Dry run: stow -vn $folder"
+            echo "Stowing folder $folder..."
+            echo "Dry run: stow -D $folder"
+            echo "Dry run: stow $folder"
         else
             if [[ "$QUIET" == true ]]; then
                 stow -D $folder > /dev/null || exit
