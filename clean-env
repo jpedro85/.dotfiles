@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/bin/bash
 
 # Ensure DOTFILES is set
 if [[ -z $DOTFILES ]]; then
@@ -16,7 +16,8 @@ fi
 pushd $DOTFILES || { echo "Failed to change directory to $DOTFILES"; exit 1; }
 
 # Unstow each folder in STOW_FOLDERS
-for folder in ${(s:,:)STOW_FOLDERS}; do
+IFS=',' read -r -a folder_array <<< "$STOW_FOLDERS"
+for folder in "${folder_array[@]}"; do
     echo "Removing $folder"
     stow -D $folder
 done
