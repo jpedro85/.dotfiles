@@ -106,13 +106,9 @@ source ~/.zsh_profile
 # [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
-alias dotfiles=/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME
-
 [ -f ~/.cargo/env ] && source $HOME/.cargo/env
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-export PATH=$PATH:/home/jpedro/.spicetify
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
