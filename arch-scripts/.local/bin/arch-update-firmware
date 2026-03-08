@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+echo -e "\e[32mUpdate Firmware\e[0m"
+
+arch-snapshot create || (($? == 127))
+
+if arh-cmd-missing fwupdmgr; then
+  arch-pkg-add fwupd
+fi
+
+fwupdmgr refresh --force
+sudo fwupdmgr update
+
+arch-snapshot create || (($? == 127))

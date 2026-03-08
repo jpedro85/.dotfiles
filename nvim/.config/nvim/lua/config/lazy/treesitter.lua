@@ -1,12 +1,13 @@
 return {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
+    lazy = false,
     build = ':TSUpdate',
     config = function()
         -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 
         ---@diagnostic disable-next-line: missing-fields
-        require('nvim-treesitter.configs').setup({
+        require('nvim-treesitter.config').setup({
             ensure_installed = {
                 'bash', 'c', 'html', 'typescript',
                 'lua', 'markdown', 'vim',
@@ -25,21 +26,10 @@ return {
             indent = { enable = true },
         })
 
-        local treesitter_parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-        treesitter_parser_config.templ = {
-            install_info = {
-                url = "https://github.com/vrischmann/tree-sitter-templ.git",
-                files = { "src/parser.c", "src/scanner.c" },
-                branch = "master",
-            },
-        }
 
         -- NOTE: This is the syntax highlight for hyprland config
         vim.filetype.add({
             pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
         })
-
-
-        vim.treesitter.language.register("templ", "templ")
     end
 }

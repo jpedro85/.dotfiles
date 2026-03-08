@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e
+
+COMMAND="$1"
+ARCHLINUX_PATH=${ARCHLINUX_PATH:-$HOME/.local/share/omarchy}
+
+if [[ -z $COMMAND ]]; then
+  echo "Usage: arch-snapshot <create|restore>" >&2
+  exit 1
+fi
+
+if ! command -v snapper &>/dev/null; then
+  exit 127 # arch-update can use this to just ignore if snapper is not available
+fi
+
+case "$COMMAND" in
+create)
+  DESC="$(uname --kernel-release)"
+
+  echo -e "\e[32mCreate system snapshot\e[0m"
+
+  # Get existing snapper config names from CSV output
+  mapfile -t CONFIGS < <(sudo snapper --csvout list-configs | awk -F, 'NR>1 {print $1}')
+
+  for config in "${CONFIGS[@]}"; do
+    sudo snapper -c "$config" create -c number -d "$DESC"
+  done
+  echo
+  ;;
+restore)
+  echo -e "\e[31mRestoring last snapshot\e[0m"
+  # List snapshots and pick the latest one interactively
+  sudo snapper list
+  read -rp "Enter snapshot number to rollback: " SNAP_NUM
+  sudo snapper rollback "$SNAP_NUM"
+  echo -e "\e[32mRollback done. Reboot to apply changes.\e[0m"
+  ;;
+esac
