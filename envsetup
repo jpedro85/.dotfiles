@@ -40,7 +40,7 @@ i3)
     ENV_META_DIR="$DOTFILES/i3/.meta"
     ;;
 hyprland)
-    STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,hyperland,dunst,bin,alacritty,fastfetch,kvantum"
+    STOW_FOLDERS="ohmyposh,zsh,rofi,tmux,nvim,hyperland,dunst,bin,alacritty,fastfetch,kvantum,archlinux,arch-scripts,wiremix"
     ENV_META_DIR="$DOTFILES/hyprland/.meta"
     ;;
 server)

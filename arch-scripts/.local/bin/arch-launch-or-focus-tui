@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# Launch or focus on a given TUI identified by the passed in as the command.
+# Use by commands like omarchy-launch-wifi to ensure there is only one wifi configuration screen open.
+
+APP_ID="org.archlinux.$(basename "$1")"
+# LAUNCH_COMMAND="arch-launch-tui $@"
+LAUNCH_COMMAND="$ARCH_SCRIPTS_DIR/arch-launch-tui $@"
+
+# exec arch-launch-or-focus "$APP_ID" "$LAUNCH_COMMAND"
+exec "$ARCH_SCRIPTS_DIR/arch-launch-or-focus" "$APP_ID" "$LAUNCH_COMMAND"

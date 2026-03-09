@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Launch the Omarchy audio controls TUI (provided by wiremix).
+
+# arch-launch-or-focus-tui wiremix
+"$ARCH_SCRIPTS_DIR/arch-launch-or-focus-tui" wiremix

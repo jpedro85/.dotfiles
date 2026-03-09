@@ -1,9 +1,9 @@
 #!/bin/bash
 
-# Add the named packages to the system if they're missing. Returns false if it couldn't be done.
+# Add the named packages to the system from the AUR if they're missing. Returns false if it couldn't be done.
 
-if arch-pkg-missing "$@"; then
-  sudo pacman -S --needed "$@" || exit 1
+if omarchy-pkg-missing "$@"; then
+  yay -S --needed "$@" || exit 1
 fi
 
 for pkg in "$@"; do

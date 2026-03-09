@@ -5,6 +5,12 @@ set -e
 COMMAND="$1"
 ARCHLINUX_PATH=${ARCHLINUX_PATH:-$HOME/.local/share/omarchy}
 
+notify() {
+  if command -v notify-send &>/dev/null; then
+    notify-send "arch-snapshot" "$1"
+  fi
+}
+
 if [[ -z $COMMAND ]]; then
   echo "Usage: arch-snapshot <create|restore>" >&2
   exit 1
@@ -27,13 +33,21 @@ create)
     sudo snapper -c "$config" create -c number -d "$DESC"
   done
   echo
+
+  notify "System snapshot created successfully"
   ;;
 restore)
   echo -e "\e[31mRestoring last snapshot\e[0m"
+  notify "Preparing snapshot rollback"
+
   # List snapshots and pick the latest one interactively
   sudo snapper list
   read -rp "Enter snapshot number to rollback: " SNAP_NUM
+
+  notify "Rolling back to snapshot $SNAP_NUM"
   sudo snapper rollback "$SNAP_NUM"
+
   echo -e "\e[32mRollback done. Reboot to apply changes.\e[0m"
+  notify "Rollback completed. Reboot required."
   ;;
 esac
