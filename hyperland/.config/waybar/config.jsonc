@@ -51,7 +51,17 @@
   },
   "clock": {
     "format": "{:%H:%M - %A, %d %b %Y}",
-    "tooltip-format": "{calendar}"
+    "tooltip-format": "{calendar}",
+    "calendar": {
+        "weeks-pos": "left",
+        "format": {
+            "months" : "<b>{}</b>",
+            "weekdays" : "<span color='#89b4fa'><b>{}</b></span>",
+            "weeks" : "<span color='#f38ba8'><b>W{:%V}</b></span>",
+            "days" : "{}",
+            "today" : "<span color='#f2cdcd' background='#45475a'><b>{}</b></span>"
+        }
+    }
   },
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
