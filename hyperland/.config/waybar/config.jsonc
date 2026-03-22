@@ -8,6 +8,7 @@
   "modules-center": ["clock"],
   "modules-right": [
     "tray",
+    "disk",
     "bluetooth",
     "network",
     "pulseaudio",
@@ -103,6 +104,10 @@
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "$ARCH_SCRIPTS_DIR/arch-launch-bluetooth &"
+  },
+  "disk": {
+      "interval": 30,
+      "format": "{free} "
   },
   "pulseaudio": {
     "format": "{icon}",

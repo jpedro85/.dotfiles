@@ -50,6 +50,10 @@
   margin-right: 13px;
 }
 
+#disk {
+  margin-right: 20px;
+}
+
 tooltip {
   padding: 2px;
 }
