@@ -12,8 +12,9 @@
     "bluetooth",
     "network",
     "pulseaudio",
-    "cpu",
-    "battery"
+    "cpu"
+    // No battery module due to device being desktop
+    // "battery"
   ],
   "hyprland/workspaces": {
     "on-click": "activate",
@@ -101,7 +102,7 @@
     "format-off": "󰂲",
     "format-disabled": "󰂲",
     "format-connected": "󰂱",
-    "format-no-controller": "",
+    "format-no-controller": "󰂲",
     "tooltip-format": "Devices connected: {num_connections}",
     "on-click": "$ARCH_SCRIPTS_DIR/arch-launch-bluetooth &"
   },
@@ -110,7 +111,8 @@
       "format": "{free} "
   },
   "pulseaudio": {
-    "format": "{icon}",
+    "format": "{icon} ",
+    "format-source": "",
     "on-click": "$ARCH_SCRIPTS_DIR/arch-launch-audio",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
