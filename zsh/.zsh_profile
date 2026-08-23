@@ -19,6 +19,7 @@ alias gush="git push"
 alias neofetch='fastfetch'
 alias fetch='fastfetch'
 alias vim="nvim"
+alias ascension="WINEPREFIX=/home/jpedro/Games/ascension-wow wine 'C:\\Program Files\\Ascension Launcher\\Ascension Launcher.exe'"
 
 addToPathFront() {
     if [[ ":$PATH:" != *":$1:"* ]]; then
@@ -28,18 +29,18 @@ addToPathFront() {
 
 export CPP_LIBS="/usr/include"
 export CPP_LIBS2="/usr/local/include"
-export JAVA_HOME="/usr/lib/jvm/java-17-openjdk"
+# export JAVA_HOME="/usr/lib/jvm/java-26-openjdk"
 export GO_HOME="/usr/local/go"
 export TERMINAL="/usr/local/bin/alacritty"
 export ANDROID_HOME="$HOME/Android/Sdk"
 export SUDO_EDITOR="nvim"
 export ARCHLINUX_PATH="$HOME/.local/share/arhclinux"
-
+export VCPKG_ROOT="$HOME/.local/share/vcpkg"
 
 # All PATHS that might be needed
 addToPathFront $HOME/.local/bin
 addToPathFront $JAVA_HOME/bin
-addToPathFront $GO_HOME/bin
+# addToPathFront $GO_HOME/bin
 addToPathFront $CPP_LIBS
 addToPathFront $CPP_LIBS2
 addToPathFront $ANDROID_HOME/Sdk
