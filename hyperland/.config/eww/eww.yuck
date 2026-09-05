@@ -1,0 +1,61 @@
+;; Keyboard layout indicator + picker.
+;; Click the indicator to open a list of layouts with a live side preview
+;; (hover an item to preview it, click to apply). Layout switching itself
+;; is done by hyprctl (see hypr/scripts/kb-layout-*.sh) - kb_layout here
+;; self-heals via defpoll in case it changes some other way.
+
+(defpoll kb_layout :interval "3s" :initial "pt"
+  "~/.config/hypr/scripts/kb-layout-get.sh")
+
+;; Which layout the side preview currently shows. Follows kb_layout unless
+;; a list item is being hovered.
+(defvar preview_layout "pt")
+
+(defwindow kb-indicator
+  :monitor 0
+  :geometry (geometry :x "8px"
+                       :y "-22px"
+                       :width "34px"
+                       :height "20px"
+                       :anchor "top right")
+  :stacking "overlay"
+  :exclusive false
+  :focusable false
+  (button :class "kb-indicator"
+          :onclick "eww update preview_layout=${kb_layout} && eww open kb-picker --toggle"
+          (label :text {kb_layout == "pt" ? "PT" : "US"})))
+
+(defwidget kb-list-item [name text]
+  (eventbox :class {kb_layout == name ? "kb-list-item active" : "kb-list-item"}
+            :cursor "pointer"
+            :onhover "eww update preview_layout=${name}"
+            :onhoverlost "eww update preview_layout=${kb_layout}"
+            :onclick "~/.config/hypr/scripts/kb-layout-set.sh ${name}"
+            (label :class "kb-list-item-label" :halign "start" :text text)))
+
+(defwindow kb-picker
+  :monitor 0
+  :geometry (geometry :x "0px"
+                       :y "0px"
+                       :width "820px"
+                       :height "260px"
+                       :anchor "center")
+  :stacking "overlay"
+  :exclusive false
+  :focusable true
+  (box :class "kb-picker"
+       :orientation "h"
+       :space-evenly false
+       (box :class "kb-list"
+            :orientation "v"
+            :space-evenly false
+            (kb-list-item :name "pt" :text "Portuguese")
+            (kb-list-item :name "us" :text "English (US)"))
+       (box :class "kb-preview"
+            :orientation "v"
+            :space-evenly false
+            (label :class "kb-preview-title"
+                   :text {preview_layout == "pt" ? "Portuguese" : "English (US)"})
+            (image :path "/home/jpedro/.config/eww/kb-${preview_layout}.svg"
+                   :image-width 620
+                   :image-height 210))))

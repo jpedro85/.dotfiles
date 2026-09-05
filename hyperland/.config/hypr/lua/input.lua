@@ -3,9 +3,12 @@
 
 hl.config({
     input = {
-        kb_layout  = "pt",
+        -- pt = default (typing), us = ANSI/English. Toggle with ALT + SPACE
+        -- (hl.dsp.exec_cmd of hypr/scripts/kb-layout-toggle.sh, see keybinds.lua).
+        kb_layout  = "pt,us",
         kb_variant = "",
-        kb_model   = "",
+        -- Physical board is an Iqunix EV63 (ANSI, no ISO key) -> pc104, not pc105.
+        kb_model   = "pc104",
         kb_options = "",
         kb_rules   = "",
 

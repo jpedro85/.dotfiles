@@ -8,6 +8,12 @@ hl.on("hyprland.start", function ()
     -- Start status bar
     hl.exec_cmd("waybar")
 
+    -- Keyboard layout indicator (eww)
+    hl.exec_cmd("eww daemon")
+    hl.timer(function()
+        hl.exec_cmd("eww open kb-indicator")
+    end, { timeout = 500, type = "oneshot" })
+
     -- Disabled for now as I don't use it
     -- Might change to turn off monitor for when I use hyprlock
     -- hl.exec_cmd("hypridle")
