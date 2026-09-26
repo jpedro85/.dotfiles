@@ -1,8 +1,14 @@
-;; Keyboard layout indicator + picker.
-;; Click the indicator to open a list of layouts with a live side preview
-;; (hover an item to preview it, click to apply). Layout switching itself
-;; is done by hyprctl (see hypr/scripts/kb-layout-*.sh) - kb_layout here
-;; self-heals via defpoll in case it changes some other way.
+;; Keyboard layout picker.
+;; The indicator lives in waybar (custom/kblayout module); right-clicking it
+;; opens this picker - a list of layouts with a live side preview (hover an
+;; item to preview it, click to apply). Layout switching itself is done by
+;; hyprctl (see hypr/scripts/kb-layout-*.sh) - kb_layout here self-heals via
+;; defpoll in case it changes some other way.
+;;
+;; kb-picker is one fullscreen, fully transparent window. Its base layer is a
+;; click-catcher that closes the picker; the visible card sits in an overlay
+;; on top with its own eventbox, so clicks on the card are NOT treated as
+;; "clicked outside". Toggled by hypr/scripts/kb-picker-toggle.sh.
 
 (defpoll kb_layout :interval "3s" :initial "pt"
   "~/.config/hypr/scripts/kb-layout-get.sh")
@@ -10,20 +16,6 @@
 ;; Which layout the side preview currently shows. Follows kb_layout unless
 ;; a list item is being hovered.
 (defvar preview_layout "pt")
-
-(defwindow kb-indicator
-  :monitor 0
-  :geometry (geometry :x "8px"
-                       :y "-22px"
-                       :width "34px"
-                       :height "20px"
-                       :anchor "top right")
-  :stacking "overlay"
-  :exclusive false
-  :focusable false
-  (button :class "kb-indicator"
-          :onclick "eww update preview_layout=${kb_layout} && eww open kb-picker --toggle"
-          (label :text {kb_layout == "pt" ? "PT" : "US"})))
 
 (defwidget kb-list-item [name text]
   (eventbox :class {kb_layout == name ? "kb-list-item active" : "kb-list-item"}
@@ -35,27 +27,32 @@
 
 (defwindow kb-picker
   :monitor 0
-  :geometry (geometry :x "0px"
-                       :y "0px"
-                       :width "820px"
-                       :height "260px"
-                       :anchor "center")
+  :geometry (geometry :width "100%" :height "100%")
   :stacking "overlay"
   :exclusive false
   :focusable true
-  (box :class "kb-picker"
-       :orientation "h"
-       :space-evenly false
-       (box :class "kb-list"
-            :orientation "v"
-            :space-evenly false
-            (kb-list-item :name "pt" :text "Portuguese")
-            (kb-list-item :name "us" :text "English (US)"))
-       (box :class "kb-preview"
-            :orientation "v"
-            :space-evenly false
-            (label :class "kb-preview-title"
-                   :text {preview_layout == "pt" ? "Portuguese" : "English (US)"})
-            (image :path "/home/jpedro/.config/eww/kb-${preview_layout}.svg"
-                   :image-width 620
-                   :image-height 210))))
+  (overlay
+    ;; Base layer: transparent, fills the screen, closes the picker on click.
+    (eventbox :class "kb-picker-backdrop"
+              :onclick "eww close kb-picker"
+              (box))
+    ;; The card, centered. Its eventbox swallows clicks so they don't reach
+    ;; the backdrop underneath.
+    (box :halign "center" :valign "center"
+         (eventbox :onclick "true"
+                   (box :class "kb-picker-card"
+                        :orientation "h"
+                        :space-evenly false
+                        (box :class "kb-list"
+                             :orientation "v"
+                             :space-evenly false
+                             (kb-list-item :name "pt" :text "Portuguese")
+                             (kb-list-item :name "us" :text "English (US)"))
+                        (box :class "kb-preview"
+                             :orientation "v"
+                             :space-evenly false
+                             (label :class "kb-preview-title"
+                                    :text {preview_layout == "pt" ? "Portuguese" : "English (US)"})
+                             (image :path "/home/jpedro/.config/eww/kb-${preview_layout}.svg"
+                                    :image-width 620
+                                    :image-height 210)))))))

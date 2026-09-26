@@ -12,7 +12,8 @@
     "bluetooth",
     "network",
     "pulseaudio",
-    "cpu"
+    "cpu",
+    "custom/kblayout"
     // No battery module due to device being desktop
     // "battery"
   ],
@@ -44,6 +45,16 @@
   "custom/logo": {
     "format": "  ",
     "tooltip": false
+  },
+  "custom/kblayout": {
+    "exec": "$HOME/.config/hypr/scripts/kb-layout-get.sh | tr '[:lower:]' '[:upper:]'",
+    "interval": 3,
+    "signal": 8,
+    "format": "󰌌 {}",
+    "on-click": "$HOME/.config/hypr/scripts/kb-layout-toggle.sh",
+    "on-click-right": "$HOME/.config/hypr/scripts/kb-picker-toggle.sh",
+    "tooltip": true,
+    "tooltip-format": "Layout: {}\nLeft-click: cycle layout\nRight-click: open layout picker"
   },
   "cpu": {
     "interval": 5,

@@ -33,7 +33,8 @@
 
 #cpu,
 #battery,
-#pulseaudio {
+#pulseaudio,
+#custom-kblayout {
   min-width: 12px;
   margin: 0 7.5px;
 }

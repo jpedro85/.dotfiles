@@ -8,11 +8,10 @@ hl.on("hyprland.start", function ()
     -- Start status bar
     hl.exec_cmd("waybar")
 
-    -- Keyboard layout indicator (eww)
+    -- eww daemon - drives the keyboard layout picker (kb-picker), opened
+    -- from the waybar "custom/kblayout" module. The indicator itself lives
+    -- in waybar now, not an eww overlay window.
     hl.exec_cmd("eww daemon")
-    hl.timer(function()
-        hl.exec_cmd("eww open kb-indicator")
-    end, { timeout = 500, type = "oneshot" })
 
     -- Disabled for now as I don't use it
     -- Might change to turn off monitor for when I use hyprlock

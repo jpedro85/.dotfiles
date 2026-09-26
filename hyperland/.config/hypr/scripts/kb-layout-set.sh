@@ -19,3 +19,6 @@ done
 
 eww update kb_layout="$layout" preview_layout="$layout" >/dev/null 2>&1
 eww close kb-picker >/dev/null 2>&1
+
+# Refresh the waybar custom/kblayout module immediately (it has "signal": 8).
+pkill -RTMIN+8 waybar >/dev/null 2>&1 || true

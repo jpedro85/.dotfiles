@@ -10,20 +10,16 @@ $border: #313244;
   font-family: "Hack Nerd Font";
 }
 
-.kb-indicator {
-  background-color: $bg;
-  color: $fg;
-  border-radius: 6px;
-  padding: 1px 8px;
-  font-size: 13px;
-  font-weight: 600;
-
-  &:hover {
-    background-color: lighten($bg, 6%);
-  }
+// eww tags the window widget with its name as a class, so ".kb-picker" here
+// is the fullscreen window itself - keep it (and the backdrop) fully
+// transparent, otherwise its square opaque corners show behind the rounded
+// card. Only .kb-picker-card is painted.
+.kb-picker,
+.kb-picker-backdrop {
+  background-color: transparent;
 }
 
-.kb-picker {
+.kb-picker-card {
   background-color: $bg;
   border: 1px solid $border;
   border-radius: 14px;

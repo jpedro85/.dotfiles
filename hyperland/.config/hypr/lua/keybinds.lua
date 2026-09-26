@@ -52,8 +52,9 @@ hl.bind("Print", hl.dsp.exec_cmd("sh -c '~/.config/hypr/scripts/screenshot.sh'")
 -- Lock the Screen
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("hyprlock"))
 
--- Keyboard layout switching is done via the eww kb-indicator/kb-picker
--- widgets for now (click the indicator). Disabled hotkey, kept for later:
+-- Keyboard layout switching is done from the waybar "custom/kblayout" module
+-- (left-click cycles, right-click opens the eww kb-picker). Disabled hotkey,
+-- kept for later:
 -- hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("~/.config/hypr/scripts/kb-layout-toggle.sh"))
 
 -- Move/resize windows with mainMod + LMB and dragging
